@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MvcApplication5.Models.Yorum>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout - Copy.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.yorum1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Firmalar.firmaAdi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.yorum1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Firmalar.firmaAdi)
+        </td>
+        <td>
+            <a href="#" title="Delete">
+                <img src="resources/images/icons/cross.png" alt="Delete" onclick="Delete(@item.yorumId)" />
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

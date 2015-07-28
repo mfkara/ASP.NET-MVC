@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TravelScannerModelStoreContainer" CdmEntityContainer="TravelScannerEntities">
+    <EntitySetMapping Name="Araba">
+      <EntityTypeMapping TypeName="TravelScannerModel.Araba">
+        <MappingFragment StoreEntitySet="Araba">
+          <ScalarProperty Name="arabaId" ColumnName="arabaId" />
+          <ScalarProperty Name="arabaTipi" ColumnName="arabaTipi" />
+          <ScalarProperty Name="model" ColumnName="model" />
+          <ScalarProperty Name="renk" ColumnName="renk" />
+          <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+          <ScalarProperty Name="marka" ColumnName="marka" />
+          <ScalarProperty Name="firmaId" ColumnName="firmaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Firmalar">
+      <EntityTypeMapping TypeName="TravelScannerModel.Firmalar">
+        <MappingFragment StoreEntitySet="Firmalar">
+          <ScalarProperty Name="firmaId" ColumnName="firmaId" />
+          <ScalarProperty Name="firmaAdi" ColumnName="firmaAdi" />
+          <ScalarProperty Name="firmaTipi" ColumnName="firmaTipi" />
+          <ScalarProperty Name="firmaPuani" ColumnName="firmaPuani" />
+          <ScalarProperty Name="firmaAciklamasi" ColumnName="firmaAciklamasi" />
+          <ScalarProperty Name="firmaAdresi" ColumnName="firmaAdresi" />
+          <ScalarProperty Name="sehirId" ColumnName="sehirId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HavaDurumu">
+      <EntityTypeMapping TypeName="TravelScannerModel.HavaDurumu">
+        <MappingFragment StoreEntitySet="HavaDurumu">
+          <ScalarProperty Name="havaId" ColumnName="havaId" />
+          <ScalarProperty Name="gun" ColumnName="gun" />
+          <ScalarProperty Name="durum" ColumnName="durum" />
+          <ScalarProperty Name="sicaklik" ColumnName="sicaklik" />
+          <ScalarProperty Name="sehirId" ColumnName="sehirId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Otel">
+      <EntityTypeMapping TypeName="TravelScannerModel.Otel">
+        <MappingFragment StoreEntitySet="Otel">
+          <ScalarProperty Name="otelId" ColumnName="otelId" />
+          <ScalarProperty Name="odaTipi" ColumnName="odaTipi" />
+          <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+          <ScalarProperty Name="gun" ColumnName="gun" />
+          <ScalarProperty Name="firmaId" ColumnName="firmaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resim">
+      <EntityTypeMapping TypeName="TravelScannerModel.Resim">
+        <MappingFragment StoreEntitySet="Resim">
+          <ScalarProperty Name="resimId" ColumnName="resimId" />
+          <ScalarProperty Name="resim1" ColumnName="resim" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sehir">
+      <EntityTypeMapping TypeName="TravelScannerModel.Sehir">
+        <MappingFragment StoreEntitySet="Sehir">
+          <ScalarProperty Name="sehirId" ColumnName="sehirId" />
+          <ScalarProperty Name="sehirAdi" ColumnName="sehirAdi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ucus">
+      <EntityTypeMapping TypeName="TravelScannerModel.Ucus">
+        <MappingFragment StoreEntitySet="Ucus">
+          <ScalarProperty Name="ucusId" ColumnName="ucusId" />
+          <ScalarProperty Name="saat" ColumnName="saat" />
+          <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+          <ScalarProperty Name="ucusSuresi" ColumnName="ucusSuresi" />
+          <ScalarProperty Name="tarih" ColumnName="tarih" />
+          <ScalarProperty Name="model" ColumnName="model" />
+          <ScalarProperty Name="mesafe" ColumnName="mesafe" />
+          <ScalarProperty Name="kalkis" ColumnName="kalkis" />
+          <ScalarProperty Name="varis" ColumnName="varis" />
+          <ScalarProperty Name="firmaId" ColumnName="firmaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Yonetici">
+      <EntityTypeMapping TypeName="TravelScannerModel.Yonetici">
+        <MappingFragment StoreEntitySet="Yonetici">
+          <ScalarProperty Name="yoneticiId" ColumnName="yoneticiId" />
+          <ScalarProperty Name="ad" ColumnName="ad" />
+          <ScalarProperty Name="soyad" ColumnName="soyad" />
+          <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Yorum">
+      <EntityTypeMapping TypeName="TravelScannerModel.Yorum">
+        <MappingFragment StoreEntitySet="Yorum">
+          <ScalarProperty Name="yorumId" ColumnName="yorumId" />
+          <ScalarProperty Name="yorum1" ColumnName="yorum" />
+          <ScalarProperty Name="firmaId" ColumnName="firmaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

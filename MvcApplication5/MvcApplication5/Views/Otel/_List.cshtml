@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MvcApplication5.Models.Otel>
+
+<p>
+    
+</p>
+<table>
+   <tr>
+    <th>
+        @Html.DisplayNameFor(model => model.odaTipi)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.fiyat)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.gun)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Firmalar.firmaAdi)
+    </th>
+    <th></th>
+</tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.odaTipi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fiyat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gun)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Firmalar.firmaAdi)
+        </td>
+        <td>
+        <td>
+            <a href="#" title="Edit">
+                <img src="resources/images/icons/pencil.png" alt="Edit" onclick="Edit(@item.otelId)" />
+            </a>
+            <a href="#" title="">
+                <img src="resources/images/icons/information.png" alt="Details" onclick="Details(@item.otelId)" />
+            </a>
+            <a href="#" title="Delete">
+                <img src="resources/images/icons/cross.png" alt="Delete" onclick="Delete(@item.otelId)" />
+            </a>
+
+
+        </td>
+    </tr>
+}
+
+</table>

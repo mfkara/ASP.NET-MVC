@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="45af45b640ff4247b340ac753197af15" Name="Diagram1">
+        <EntityTypeShape EntityType="TravelScannerModel.Araba" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelScannerModel.Firmalar" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelScannerModel.HavaDurumu" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelScannerModel.Otel" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelScannerModel.Resim" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelScannerModel.Sehir" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelScannerModel.Ucus" Width="1.5" PointX="8.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelScannerModel.Yonetici" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelScannerModel.Yorum" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
+        <AssociationConnector Association="TravelScannerModel.FK_Araba_Firmalar" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelScannerModel.FK_Firmalar_Sehir" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelScannerModel.FK_Otel_Firmalar" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelScannerModel.FK_Ucus_Firmalar" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelScannerModel.FK_Yorum_Firmalar" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelScannerModel.FK_HavaDurumu_Sehir" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelScannerModel.FK_Ucus_Sehir_kalkis" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelScannerModel.FK_Ucus_Sehir_varis" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,253 @@
+﻿@model IEnumerable<MvcApplication5.Models.Ucus>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="keywords" content="jQuery Tabs, Tabs Widget, TabView, jqxTabs" />
+    <meta name="description" content="The jqxTabs is breaking the content into multiple sections. You
+        can populate it from 'UL' for the tab titles and 'DIV' for it's contents." />
+    <title id='Description'>
+        Travel Scanner
+    </title>
+    <link rel="stylesheet" href="~/scripts/jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link href="~/Scripts/jqwidgets/styles/jqx.ui-start.css" rel="stylesheet" />
+    <link href="~/Scripts/jqwidgets/StyleSheet1.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="~/Scripts/jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="~/Scripts/jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="~/scripts/jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="~/Scripts/ucusAra.js"></script>
+
+        <script type="text/javascript">
+    $(document).ready(function () {
+        // Create jqxTabs.
+
+
+
+        //uçuşları gride çekmek için datasource
+        var ucusSource =
+        {
+            datatype: "json",
+            datafields: [
+                { name: 'ucusId', type: 'number' },
+                { name: 'saat', type: 'string' },
+                { name: 'fiyat', type: 'number' },
+                { name: 'ucusSuresi', type: 'number' },
+                { name: 'tarih', type: 'date', cellsformat: 'dd.MM.yyyy' },
+                { name: 'model', type: 'string' },
+                { name: 'mesafe', type: 'number' },
+                { name: 'sehirAdi', type: 'string' },
+                { name: 'kalkis', type: 'number' },
+                { name: 'sehirAdi', type: 'string' },
+                { name: 'varis', type: 'number' },
+                { name: 'firmaAdi', type: 'string' },
+                { name: 'firmaId', type: 'number' },
+
+
+            ],
+            id: 'ucusId',
+            url: 'getUcus'
+        };
+        var udataAdapter = new $.jqx.dataAdapter(ucusSource);
+
+
+        //sehirleri çekmek için dropdown list metodu ekliyoruz
+        var sehirsource =
+        {
+            datatype: "json",
+            datafields: [
+                { name: 'sehirId' },
+                { name: 'sehirAdi', type: 'string' }
+
+            ],
+            id: 'sehirId',
+            url: 'getSehir'
+        };
+        var dataAdapterSK = new $.jqx.dataAdapter(sehirsource);
+        $("#ugrid").jqxGrid(
+           {
+               width: 1250,
+
+               source: udataAdapter,
+               //showfilterrow: true,
+               pageable: true,
+               autoheight: true,
+               theme: 'ui-start',
+               columns: [
+                   //{ text: "sehirId", datafield: "sehirId", width: '120px' },
+                   //{ text: "sehirAdi", datafield: "sehirAdi", width: '120px' },
+                   { text: "Firma Adı", datafield: "firmaAdi", width: '200px' },
+                   { text: "Tarih", datafield: "tarih", width: '120px', cellsformat: 'dd.MM.yyyy' },
+                   { text: "Saat", datafield: "saat", width: '120px' },
+                   { text: "Kalkış", datafield: "sehirAdi", width: '120px' },
+                   { text: "Varış", datafield: "varis", width: '120px' },
+                   { text: "fiyat", datafield: "fiyat", width: '120px' },
+                   {
+                       text: ' ',
+                       datafield: 'SATIN AL',
+                       width: '100px',
+                       columntype: 'button',
+                       cellsrenderer: function () { return "SATIN AL"; },
+                       buttonclick: function (row) { window.location.href = "http://www.turkishairlines.com" },
+
+                   }
+               ],
+           });
+        $('#jqxTabs').jqxTabs({ width: '90%', height: 600, position: 'top', theme: 'ui-start' });
+        $('#Gidis').jqxDateTimeInput({ width: '250px', height: '25px', theme: 'ui-start' });
+        $('#Donus').jqxDateTimeInput({ width: '250px', height: '25px', theme: 'ui-start' });
+        $('#tarih').jqxDateTimeInput({ width: '250px', height: '25px', theme: 'ui-start' });
+        $('#oTarih').jqxDateTimeInput({ width: '250px', height: '25px', theme: 'ui-start' });
+
+
+        $("#jqxButtonAra").jqxButton({ width: '150', theme: 'ui-start' });
+        $("#jqxButtonAAra").jqxButton({ width: '150', theme: 'ui-start' });
+        $("#jqxButtonOAra").jqxButton({ width: '150', theme: 'ui-start' });
+
+        $('#Kalkis').jqxDropDownList({ source: dataAdapterSK, theme: 'ui-start', displayMember: 'sehirAdi', valueMember: 'sehirId', width: '200px', height: '25px' });
+        var dataAdapterSV = new $.jqx.dataAdapter(sehirsource);
+        $('#Varis').jqxDropDownList({ source: dataAdapterSV, theme: 'ui-start', displayMember: 'sehirAdi', valueMember: 'sehirId', width: '200px', height: '25px' });
+        var dataAdapterA = new $.jqx.dataAdapter(sehirsource);
+        $('#aSehir').jqxDropDownList({ source: dataAdapterA, theme: 'ui-start', displayMember: 'sehirAdi', valueMember: 'sehirId', width: '200px', height: '25px' });
+        var dataAdapterO = new $.jqx.dataAdapter(sehirsource);
+        $('#oSehir').jqxDropDownList({ source: dataAdapterO, theme: 'ui-start', displayMember: 'sehirAdi', valueMember: 'sehirId', width: '200px', height: '25px' });
+
+        $("#jqxButtonAra").click(function () {
+        
+             $.ajax({
+            type: "POST",
+            url: '@Url.Action("ucusAra", "Home")',
+            data: {},
+            success: function (data) {
+                $("#table1").html(data);
+
+            }
+        });
+
+            //$("#ugrid").jqxGrid({
+
+            //    });
+        });
+
+
+
+    });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id='jqxTabs'>
+            <ul>
+                <li style="margin-left: 30px;">UÇUŞ</li>
+                <li>ARABA</li>
+                <li>OTEL</li>
+            </ul>
+            <div>
+                <div>
+                    Gidiş:<div id="Gidis" style="text-align:center;"></div>
+                    
+                </div>
+                <div>
+                    Dönüş:<div id="Donus" style="text-align:center;"></div>
+                    
+                </div>
+                <div>
+                    Kalkış:<div id="Kalkis" style="text-align:center;"></div>
+                    
+                </div>
+                <div>
+                    Varış:<div id="Varis" style="text-align:center;"></div>
+                    
+                </div>
+                <div>
+                   <br />
+                </div>
+                <div>
+                   
+                    <input type="button" value="ARA" id='jqxButtonAra' onclick="Ara()" />
+                </div>
+                <div id="ugrid"></div>
+
+            </div>
+            <div>
+                @*<div>ARABA</div>*@
+                <div>
+                    Tarih:<div id="tarih" style="text-align:center;"></div>
+
+                </div>
+                <div>
+                    Şehir:<div id="aSehir" style="text-align:center;"></div>
+
+                </div>
+                <div>
+                    <br />
+                </div>
+                <div>
+                    <input type="button" value="ARA" id='jqxButtonAAra' />
+                </div>
+            </div>
+            <div>
+                @*<div>OTEL</div>*@
+                <div>
+                    Tarih:<div id="oTarih" style="text-align:center;"></div>
+
+                </div>
+                <div>
+                    Şehir:<div id="oSehir" style="text-align:center;"></div>
+
+                </div>
+                <div>
+                    <br />
+                </div>
+                <div>
+                    <input type="button" value="ARA" id='jqxButtonOAra' />
+                </div>
+            </div>
+           
+        </div>
+        
+    </div>
+    <div id="table1">
+        <a href="#" title="Comment" onclick="Comment()">
+           Firmalar Hakkında
+        </a>
+    </div>
+</body>
+</html>
+<script>
+    function Comment() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("IndexFirmalar", "Home")',
+            data: {},
+            success: function (data) {
+                $("#jqxWidget").html(data);
+
+            }
+        });
+    }
+</script>

@@ -1,0 +1,98 @@
+﻿@model MvcApplication5.Models.Firmalar
+
+@{
+    ViewBag.Title = "Details";
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#yorumForm input[type=submit]").click(function () {
+
+            var t = $("#yorumForm");
+            var yaziId = t.find("input[name=yaziId]").val();
+           // var adSoyad = t.find("input[name=adSoyad]").val();
+            var icerik = t.find("textarea[name=icerik]").val();
+            $.get("/Home/Create/", { id:yaziId,yorm:icerik },
+	            function (result) {
+	                
+	                $("#yorumlar").append("<li>"+icerik+"</li>");
+	            }
+            );
+            //$.post("/Home/Create/", {  yorum: icerik },
+	        //    function (result) {
+	        //        $("#yorumlar").append("<li><h3>" + adSoyad + "</h3> " + icerik + "</li>");
+	        //    }
+            //);
+
+        });
+
+        $(".sil").click(function () {
+            var t = $(this);
+            var t1 = $("#yorumForm");
+            var yaziId = t1.find("input[name=yaziId]").val();
+            var id = t.attr("id");
+            $.get("/Home/Delete/", { id:id ,fid:yaziId},
+	            function (result) {
+	                t.parent().slideUp("slow");
+	            }
+            );
+        })
+
+    });
+
+</script>
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Firmalar</legend>
+
+    <div class="display-label">Firma Adi</div>
+    <div class="display-field">@Model.firmaAdi</div>
+
+    <div class="display-label">Firma Açıklaması</div>
+    <div class="display-field">@Model.firmaAciklamasi</div>
+
+    <div class="display-label">Firma Puanı</div>
+    <div class="display-field">@Model.firmaPuani</div>
+
+    <div class="display-label">Firma Tipi</div>
+    <div class="display-field">@Model.firmaTipi</div>
+
+
+    <div class="display-label">yorumlar</div>
+    <div class="display-field">@(Model.Yorum == null ? "None" : Model.Yorum.Count.ToString())</div>
+</fieldset>
+
+<div id="yorumForm">
+    <input type="hidden" name="yaziId" value="@Model.firmaId" />
+    <fieldset>
+        <legend>Yorum Ekle</legend>
+        
+        <label>
+            Yorumunuz
+        </label>
+        <br />
+        <textarea name="icerik"></textarea>
+        <br />
+        <input name="submitButton" type="submit" value="Gönder" />
+    </fieldset>
+</div>
+
+
+<div>
+    <ul id="yorumlar">
+        @foreach (var item in ViewBag.yorumlar)
+        {
+            <li>@item.yorum1 <a href="#" id="@item.yorumId" class="sil">Sil</a></li>
+        }
+    </ul>
+</div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.firmaId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

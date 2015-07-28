@@ -1,0 +1,73 @@
+﻿@model MvcApplication5.Models.Ucus
+
+<fieldset>
+    <legend>Ucus</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.saat)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.saat)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.fiyat)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.fiyat)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ucusSuresi)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ucusSuresi)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tarih)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tarih)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.model)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.model)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.mesafe)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.mesafe)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.kalkis)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.kalkis)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.varis)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.varis)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.firmaId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.firmaId)
+    </div>
+</fieldset>
+<p><a href="#" title="Edit">
+        <img src="resources/images/icons/pencil.png" alt="Edit" onclick="Edit(@Model.ucusId)" />
+    </a>
+    <input type="button" class="button" value="Back To List" id="btnNew" onclick="BackToList()" />
+</p>

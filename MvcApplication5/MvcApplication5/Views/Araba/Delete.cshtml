@@ -1,0 +1,55 @@
+﻿@model MvcApplication5.Models.Araba
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Araba</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.arabaTipi)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.arabaTipi)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.model)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.model)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.renk)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.renk)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.fiyat)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.fiyat)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.marka)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.marka)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.firmaId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.firmaId)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        <input type="button" class="button" value="Back To List" id="btnNew" onclick="BackToList()" />
+    </p>
+}

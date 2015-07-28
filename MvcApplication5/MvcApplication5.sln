@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcApplication5", "MvcApplication5\MvcApplication5.csproj", "{8BC56C2E-745C-4146-A073-A2D30C469773}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://merttotuk.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MvcApplication5\\MvcApplication5.csproj
+		SccProjectName1 = MvcApplication5
+		SccLocalPath1 = MvcApplication5
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8BC56C2E-745C-4146-A073-A2D30C469773}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BC56C2E-745C-4146-A073-A2D30C469773}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BC56C2E-745C-4146-A073-A2D30C469773}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BC56C2E-745C-4146-A073-A2D30C469773}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

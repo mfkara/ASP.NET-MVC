@@ -1,0 +1,39 @@
+﻿@model MvcApplication5.Models.Otel
+
+<fieldset>
+    <legend>Otel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.odaTipi)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.odaTipi)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.fiyat)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.fiyat)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gun)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gun)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.firmaId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.firmaId)
+    </div>
+</fieldset>
+<p>
+    <a href="#" title="Edit">
+        <img src="resources/images/icons/pencil.png" alt="Edit" onclick="Edit(@Model.otelId)" />
+    </a>
+    <input type="button" class="button" value="Back To List" id="btnNew" onclick="BackToList()" />
+</p>

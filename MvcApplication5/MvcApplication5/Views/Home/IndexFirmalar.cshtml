@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MvcApplication5.Models.Firmalar>
+@{
+    ViewBag.Title = "IndexFirmalar";
+}
+
+<h2>IndexFirmalar</h2>
+<table id="table1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.firmaId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firmaAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firmaTipi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firmaPuani)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firmaAciklamasi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firmaAdresi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sehir.sehirAdi)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.firmaAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firmaTipi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firmaPuani)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firmaAciklamasi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firmaAdresi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sehir.sehirAdi)
+            </td>
+
+            <td>
+                
+                <a href="#" title="">
+                    <img src="resources/images/icons/information.png" alt="Details" onclick="Details(@item.firmaId)" />
+                </a>
+                
+            </td>
+        </tr>
+    }
+></table>
+<script>
+    function Details(id) {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("Details","Home")',
+            data: { id: id },
+            success: function (data) {
+                $("#table1").html(data);
+
+            }
+        });
+    }
+
+
+</script>

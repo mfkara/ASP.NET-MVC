@@ -1,0 +1,147 @@
+﻿@model IEnumerable<MvcApplication5.Models.Firmalar>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout - Copy.cshtml";
+}
+<p>
+    <input type="button" class="button" value="Create New" id="btnNew" onclick="Create()" />
+</p>
+<table id="table1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.firmaId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firmaAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firmaTipi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firmaPuani)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firmaAciklamasi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firmaAdresi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sehir.sehirAdi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.firmaAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.firmaTipi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.firmaPuani)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.firmaAciklamasi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.firmaAdresi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sehir.sehirAdi)
+        </td>
+        <td>
+            <a href="#" title="Edit">
+                <img src="resources/images/icons/pencil.png" alt="Edit" onclick="Edit(@item.firmaId)" />
+            </a>
+            <a href="#" title="">
+                <img src="resources/images/icons/information.png" alt="Details" onclick="Details(@item.firmaId)" />
+            </a>
+            <a href="#" title="Delete">
+                <img src="resources/images/icons/cross.png" alt="Delete" onclick="Delete(@item.firmaId)" />
+            </a>
+        </td>
+    </tr>
+}
+
+</table>
+
+<script>
+    function Create() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("Create","Firma")',
+            data: {},
+            success: function (data) {
+                $("#table1").html(data);
+
+            }
+        });
+    }
+    function BackToList() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("_List", "Firma")',
+            data: {},
+            success: function (data) {
+                $("#table1").html(data);
+
+            }
+        });
+    }
+    function Details(id) {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("Details", "Firma")',
+            data: { id: id },
+            success: function (data) {
+                $("#table1").html(data);
+
+            }
+        });
+    }
+    function Edit(id) {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("Edit", "Firma")',
+            data: { id: id },
+            success: function (data) {
+                $("#table1").html(data);
+
+            }
+        });
+    }
+    function Delete(id) {
+        var result = confirm("Silmek istediğinizden emin misiniz??");
+        if (result)
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Delete", "Firma")',
+                data: { id: id },
+                success: function (data) {
+                    $("#table1").html(data);
+                    $("#table1").bind(data);
+
+                }
+            });
+    }
+    function DeleteConfirmed(id) {
+        var result = confirm("Silmek istediğinizden emin misiniz??");
+        if (result)
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeleteConfirmed", "Firma")',
+                data: { id: id },
+                success: function (data) {
+                    $("#table1").html(data);
+                    $("#table1").bind(data);
+
+                }
+            });
+    }
+
+</script>

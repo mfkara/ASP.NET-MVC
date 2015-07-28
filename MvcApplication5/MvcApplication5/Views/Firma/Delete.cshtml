@@ -1,0 +1,62 @@
+﻿@model MvcApplication5.Models.Firmalar
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Firmalar</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.firmaId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.firmaId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.firmaAdi)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.firmaAdi)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.firmaTipi)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.firmaTipi)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.firmaPuani)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.firmaPuani)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.firmaAciklamasi)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.firmaAciklamasi)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.firmaAdresi)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.firmaAdresi)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sehirId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sehirId)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        <input type="button" class="button" value="Back To List" id="btnNew" onclick="BackToList()" />
+    </p>
+}

@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TravelScannerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Araba">
+          <Key>
+            <PropertyRef Name="arabaId" />
+          </Key>
+          <Property Name="arabaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="arabaTipi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="model" Type="nvarchar(max)" />
+          <Property Name="renk" Type="nvarchar(max)" />
+          <Property Name="fiyat" Type="int" Nullable="false" />
+          <Property Name="marka" Type="nvarchar(max)" />
+          <Property Name="firmaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Firmalar">
+          <Key>
+            <PropertyRef Name="firmaId" />
+          </Key>
+          <Property Name="firmaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firmaAdi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="firmaTipi" Type="nvarchar(max)" />
+          <Property Name="firmaPuani" Type="int" />
+          <Property Name="firmaAciklamasi" Type="nvarchar(max)" />
+          <Property Name="firmaAdresi" Type="nvarchar(max)" />
+          <Property Name="sehirId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HavaDurumu">
+          <Key>
+            <PropertyRef Name="havaId" />
+          </Key>
+          <Property Name="havaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="gun" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="durum" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="sicaklik" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="sehirId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Otel">
+          <Key>
+            <PropertyRef Name="otelId" />
+          </Key>
+          <Property Name="otelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="odaTipi" Type="nvarchar(max)" />
+          <Property Name="fiyat" Type="int" Nullable="false" />
+          <Property Name="gun" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="firmaId" Type="int" />
+        </EntityType>
+        <EntityType Name="Resim">
+          <Key>
+            <PropertyRef Name="resimId" />
+          </Key>
+          <Property Name="resimId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="resim" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sehir">
+          <Key>
+            <PropertyRef Name="sehirId" />
+          </Key>
+          <Property Name="sehirId" Type="int" Nullable="false" />
+          <Property Name="sehirAdi" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ucus">
+          <Key>
+            <PropertyRef Name="ucusId" />
+          </Key>
+          <Property Name="ucusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="saat" Type="time" Precision="7" Nullable="false" />
+          <Property Name="fiyat" Type="int" Nullable="false" />
+          <Property Name="ucusSuresi" Type="time" Precision="7" />
+          <Property Name="tarih" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="model" Type="nvarchar(max)" />
+          <Property Name="mesafe" Type="nvarchar(max)" />
+          <Property Name="kalkis" Type="int" Nullable="false" />
+          <Property Name="varis" Type="int" Nullable="false" />
+          <Property Name="firmaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Yonetici">
+          <Key>
+            <PropertyRef Name="yoneticiId" />
+          </Key>
+          <Property Name="yoneticiId" Type="int" Nullable="false" />
+          <Property Name="ad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="soyad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="kullaniciAdi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="sifre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="mail" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Yorum">
+          <Key>
+            <PropertyRef Name="yorumId" />
+          </Key>
+          <Property Name="yorumId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="yorum" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="firmaId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Araba_Firmalar">
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="1" />
+          <End Role="Araba" Type="Self.Araba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firmalar">
+              <PropertyRef Name="firmaId" />
+            </Principal>
+            <Dependent Role="Araba">
+              <PropertyRef Name="firmaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Firmalar_Sehir">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="sehirId" />
+            </Principal>
+            <Dependent Role="Firmalar">
+              <PropertyRef Name="sehirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HavaDurumu_Sehir">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+          <End Role="HavaDurumu" Type="Self.HavaDurumu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="sehirId" />
+            </Principal>
+            <Dependent Role="HavaDurumu">
+              <PropertyRef Name="sehirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Otel_Firmalar">
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="0..1" />
+          <End Role="Otel" Type="Self.Otel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firmalar">
+              <PropertyRef Name="firmaId" />
+            </Principal>
+            <Dependent Role="Otel">
+              <PropertyRef Name="firmaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ucus_Firmalar">
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="1" />
+          <End Role="Ucus" Type="Self.Ucus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firmalar">
+              <PropertyRef Name="firmaId" />
+            </Principal>
+            <Dependent Role="Ucus">
+              <PropertyRef Name="firmaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ucus_Sehir_kalkis">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+          <End Role="Ucus" Type="Self.Ucus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="sehirId" />
+            </Principal>
+            <Dependent Role="Ucus">
+              <PropertyRef Name="kalkis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ucus_Sehir_varis">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+          <End Role="Ucus" Type="Self.Ucus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="sehirId" />
+            </Principal>
+            <Dependent Role="Ucus">
+              <PropertyRef Name="varis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorum_Firmalar">
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="1" />
+          <End Role="Yorum" Type="Self.Yorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firmalar">
+              <PropertyRef Name="firmaId" />
+            </Principal>
+            <Dependent Role="Yorum">
+              <PropertyRef Name="firmaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TravelScannerModelStoreContainer">
+          <EntitySet Name="Araba" EntityType="Self.Araba" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Firmalar" EntityType="Self.Firmalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HavaDurumu" EntityType="Self.HavaDurumu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Otel" EntityType="Self.Otel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resim" EntityType="Self.Resim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sehir" EntityType="Self.Sehir" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ucus" EntityType="Self.Ucus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yonetici" EntityType="Self.Yonetici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yorum" EntityType="Self.Yorum" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Araba_Firmalar" Association="Self.FK_Araba_Firmalar">
+            <End Role="Firmalar" EntitySet="Firmalar" />
+            <End Role="Araba" EntitySet="Araba" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Firmalar_Sehir" Association="Self.FK_Firmalar_Sehir">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="Firmalar" EntitySet="Firmalar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HavaDurumu_Sehir" Association="Self.FK_HavaDurumu_Sehir">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="HavaDurumu" EntitySet="HavaDurumu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Otel_Firmalar" Association="Self.FK_Otel_Firmalar">
+            <End Role="Firmalar" EntitySet="Firmalar" />
+            <End Role="Otel" EntitySet="Otel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ucus_Firmalar" Association="Self.FK_Ucus_Firmalar">
+            <End Role="Firmalar" EntitySet="Firmalar" />
+            <End Role="Ucus" EntitySet="Ucus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ucus_Sehir_kalkis" Association="Self.FK_Ucus_Sehir_kalkis">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="Ucus" EntitySet="Ucus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ucus_Sehir_varis" Association="Self.FK_Ucus_Sehir_varis">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="Ucus" EntitySet="Ucus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorum_Firmalar" Association="Self.FK_Yorum_Firmalar">
+            <End Role="Firmalar" EntitySet="Firmalar" />
+            <End Role="Yorum" EntitySet="Yorum" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TravelScannerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Araba">
+          <Key>
+            <PropertyRef Name="arabaId" />
+          </Key>
+          <Property Name="arabaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="arabaTipi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="model" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="renk" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fiyat" Type="Int32" Nullable="false" />
+          <Property Name="marka" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="firmaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Firmalar" Relationship="Self.FK_Araba_Firmalar" FromRole="Araba" ToRole="Firmalar" />
+        </EntityType>
+        <EntityType Name="Firmalar">
+          <Key>
+            <PropertyRef Name="firmaId" />
+          </Key>
+          <Property Name="firmaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firmaAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firmaTipi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="firmaPuani" Type="Int32" />
+          <Property Name="firmaAciklamasi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="firmaAdresi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sehirId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Araba" Relationship="Self.FK_Araba_Firmalar" FromRole="Firmalar" ToRole="Araba" />
+          <NavigationProperty Name="Sehir" Relationship="Self.FK_Firmalar_Sehir" FromRole="Firmalar" ToRole="Sehir" />
+          <NavigationProperty Name="Otel" Relationship="Self.FK_Otel_Firmalar" FromRole="Firmalar" ToRole="Otel" />
+          <NavigationProperty Name="Ucus" Relationship="Self.FK_Ucus_Firmalar" FromRole="Firmalar" ToRole="Ucus" />
+          <NavigationProperty Name="Yorum" Relationship="Self.FK_Yorum_Firmalar" FromRole="Firmalar" ToRole="Yorum" />
+        </EntityType>
+        <EntityType Name="HavaDurumu">
+          <Key>
+            <PropertyRef Name="havaId" />
+          </Key>
+          <Property Name="havaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gun" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="durum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sicaklik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sehirId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sehir" Relationship="Self.FK_HavaDurumu_Sehir" FromRole="HavaDurumu" ToRole="Sehir" />
+        </EntityType>
+        <EntityType Name="Otel">
+          <Key>
+            <PropertyRef Name="otelId" />
+          </Key>
+          <Property Name="otelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="odaTipi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fiyat" Type="Int32" Nullable="false" />
+          <Property Name="gun" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firmaId" Type="Int32" />
+          <NavigationProperty Name="Firmalar" Relationship="Self.FK_Otel_Firmalar" FromRole="Otel" ToRole="Firmalar" />
+        </EntityType>
+        <EntityType Name="Resim">
+          <Key>
+            <PropertyRef Name="resimId" />
+          </Key>
+          <Property Name="resimId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="resim1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sehir">
+          <Key>
+            <PropertyRef Name="sehirId" />
+          </Key>
+          <Property Name="sehirId" Type="Int32" Nullable="false" />
+          <Property Name="sehirAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Firmalar" Relationship="Self.FK_Firmalar_Sehir" FromRole="Sehir" ToRole="Firmalar" />
+          <NavigationProperty Name="HavaDurumu" Relationship="Self.FK_HavaDurumu_Sehir" FromRole="Sehir" ToRole="HavaDurumu" />
+          <NavigationProperty Name="Ucus" Relationship="Self.FK_Ucus_Sehir_kalkis" FromRole="Sehir" ToRole="Ucus" />
+          <NavigationProperty Name="Ucus1" Relationship="Self.FK_Ucus_Sehir_varis" FromRole="Sehir" ToRole="Ucus" />
+        </EntityType>
+        <EntityType Name="Ucus">
+          <Key>
+            <PropertyRef Name="ucusId" />
+          </Key>
+          <Property Name="ucusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="saat" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="fiyat" Type="Int32" Nullable="false" />
+          <Property Name="ucusSuresi" Type="Time" Precision="7" />
+          <Property Name="tarih" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="model" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="mesafe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="kalkis" Type="Int32" Nullable="false" />
+          <Property Name="varis" Type="Int32" Nullable="false" />
+          <Property Name="firmaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Firmalar" Relationship="Self.FK_Ucus_Firmalar" FromRole="Ucus" ToRole="Firmalar" />
+          <NavigationProperty Name="Sehir" Relationship="Self.FK_Ucus_Sehir_kalkis" FromRole="Ucus" ToRole="Sehir" />
+          <NavigationProperty Name="Sehir1" Relationship="Self.FK_Ucus_Sehir_varis" FromRole="Ucus" ToRole="Sehir" />
+        </EntityType>
+        <EntityType Name="Yonetici">
+          <Key>
+            <PropertyRef Name="yoneticiId" />
+          </Key>
+          <Property Name="yoneticiId" Type="Int32" Nullable="false" />
+          <Property Name="ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="soyad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kullaniciAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sifre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Yorum">
+          <Key>
+            <PropertyRef Name="yorumId" />
+          </Key>
+          <Property Name="yorumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="yorum1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firmaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Firmalar" Relationship="Self.FK_Yorum_Firmalar" FromRole="Yorum" ToRole="Firmalar" />
+        </EntityType>
+        <Association Name="FK_Araba_Firmalar">
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="1" />
+          <End Role="Araba" Type="Self.Araba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firmalar">
+              <PropertyRef Name="firmaId" />
+            </Principal>
+            <Dependent Role="Araba">
+              <PropertyRef Name="firmaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Firmalar_Sehir">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="sehirId" />
+            </Principal>
+            <Dependent Role="Firmalar">
+              <PropertyRef Name="sehirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Otel_Firmalar">
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="0..1" />
+          <End Role="Otel" Type="Self.Otel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firmalar">
+              <PropertyRef Name="firmaId" />
+            </Principal>
+            <Dependent Role="Otel">
+              <PropertyRef Name="firmaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ucus_Firmalar">
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="1" />
+          <End Role="Ucus" Type="Self.Ucus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firmalar">
+              <PropertyRef Name="firmaId" />
+            </Principal>
+            <Dependent Role="Ucus">
+              <PropertyRef Name="firmaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorum_Firmalar">
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="1" />
+          <End Role="Yorum" Type="Self.Yorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firmalar">
+              <PropertyRef Name="firmaId" />
+            </Principal>
+            <Dependent Role="Yorum">
+              <PropertyRef Name="firmaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HavaDurumu_Sehir">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+          <End Role="HavaDurumu" Type="Self.HavaDurumu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="sehirId" />
+            </Principal>
+            <Dependent Role="HavaDurumu">
+              <PropertyRef Name="sehirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ucus_Sehir_kalkis">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+          <End Role="Ucus" Type="Self.Ucus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="sehirId" />
+            </Principal>
+            <Dependent Role="Ucus">
+              <PropertyRef Name="kalkis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ucus_Sehir_varis">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+          <End Role="Ucus" Type="Self.Ucus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="sehirId" />
+            </Principal>
+            <Dependent Role="Ucus">
+              <PropertyRef Name="varis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TravelScannerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Araba" EntityType="Self.Araba" />
+          <EntitySet Name="Firmalar" EntityType="Self.Firmalar" />
+          <EntitySet Name="HavaDurumu" EntityType="Self.HavaDurumu" />
+          <EntitySet Name="Otel" EntityType="Self.Otel" />
+          <EntitySet Name="Resim" EntityType="Self.Resim" />
+          <EntitySet Name="Sehir" EntityType="Self.Sehir" />
+          <EntitySet Name="Ucus" EntityType="Self.Ucus" />
+          <EntitySet Name="Yonetici" EntityType="Self.Yonetici" />
+          <EntitySet Name="Yorum" EntityType="Self.Yorum" />
+          <AssociationSet Name="FK_Araba_Firmalar" Association="Self.FK_Araba_Firmalar">
+            <End Role="Firmalar" EntitySet="Firmalar" />
+            <End Role="Araba" EntitySet="Araba" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Firmalar_Sehir" Association="Self.FK_Firmalar_Sehir">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="Firmalar" EntitySet="Firmalar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Otel_Firmalar" Association="Self.FK_Otel_Firmalar">
+            <End Role="Firmalar" EntitySet="Firmalar" />
+            <End Role="Otel" EntitySet="Otel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ucus_Firmalar" Association="Self.FK_Ucus_Firmalar">
+            <End Role="Firmalar" EntitySet="Firmalar" />
+            <End Role="Ucus" EntitySet="Ucus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorum_Firmalar" Association="Self.FK_Yorum_Firmalar">
+            <End Role="Firmalar" EntitySet="Firmalar" />
+            <End Role="Yorum" EntitySet="Yorum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HavaDurumu_Sehir" Association="Self.FK_HavaDurumu_Sehir">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="HavaDurumu" EntitySet="HavaDurumu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ucus_Sehir_kalkis" Association="Self.FK_Ucus_Sehir_kalkis">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="Ucus" EntitySet="Ucus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ucus_Sehir_varis" Association="Self.FK_Ucus_Sehir_varis">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="Ucus" EntitySet="Ucus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TravelScannerModelStoreContainer" CdmEntityContainer="TravelScannerEntities">
+          <EntitySetMapping Name="Araba">
+            <EntityTypeMapping TypeName="TravelScannerModel.Araba">
+              <MappingFragment StoreEntitySet="Araba">
+                <ScalarProperty Name="arabaId" ColumnName="arabaId" />
+                <ScalarProperty Name="arabaTipi" ColumnName="arabaTipi" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="renk" ColumnName="renk" />
+                <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+                <ScalarProperty Name="marka" ColumnName="marka" />
+                <ScalarProperty Name="firmaId" ColumnName="firmaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Firmalar">
+            <EntityTypeMapping TypeName="TravelScannerModel.Firmalar">
+              <MappingFragment StoreEntitySet="Firmalar">
+                <ScalarProperty Name="firmaId" ColumnName="firmaId" />
+                <ScalarProperty Name="firmaAdi" ColumnName="firmaAdi" />
+                <ScalarProperty Name="firmaTipi" ColumnName="firmaTipi" />
+                <ScalarProperty Name="firmaPuani" ColumnName="firmaPuani" />
+                <ScalarProperty Name="firmaAciklamasi" ColumnName="firmaAciklamasi" />
+                <ScalarProperty Name="firmaAdresi" ColumnName="firmaAdresi" />
+                <ScalarProperty Name="sehirId" ColumnName="sehirId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HavaDurumu">
+            <EntityTypeMapping TypeName="TravelScannerModel.HavaDurumu">
+              <MappingFragment StoreEntitySet="HavaDurumu">
+                <ScalarProperty Name="havaId" ColumnName="havaId" />
+                <ScalarProperty Name="gun" ColumnName="gun" />
+                <ScalarProperty Name="durum" ColumnName="durum" />
+                <ScalarProperty Name="sicaklik" ColumnName="sicaklik" />
+                <ScalarProperty Name="sehirId" ColumnName="sehirId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Otel">
+            <EntityTypeMapping TypeName="TravelScannerModel.Otel">
+              <MappingFragment StoreEntitySet="Otel">
+                <ScalarProperty Name="otelId" ColumnName="otelId" />
+                <ScalarProperty Name="odaTipi" ColumnName="odaTipi" />
+                <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+                <ScalarProperty Name="gun" ColumnName="gun" />
+                <ScalarProperty Name="firmaId" ColumnName="firmaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resim">
+            <EntityTypeMapping TypeName="TravelScannerModel.Resim">
+              <MappingFragment StoreEntitySet="Resim">
+                <ScalarProperty Name="resimId" ColumnName="resimId" />
+                <ScalarProperty Name="resim1" ColumnName="resim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sehir">
+            <EntityTypeMapping TypeName="TravelScannerModel.Sehir">
+              <MappingFragment StoreEntitySet="Sehir">
+                <ScalarProperty Name="sehirId" ColumnName="sehirId" />
+                <ScalarProperty Name="sehirAdi" ColumnName="sehirAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ucus">
+            <EntityTypeMapping TypeName="TravelScannerModel.Ucus">
+              <MappingFragment StoreEntitySet="Ucus">
+                <ScalarProperty Name="ucusId" ColumnName="ucusId" />
+                <ScalarProperty Name="saat" ColumnName="saat" />
+                <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+                <ScalarProperty Name="ucusSuresi" ColumnName="ucusSuresi" />
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="mesafe" ColumnName="mesafe" />
+                <ScalarProperty Name="kalkis" ColumnName="kalkis" />
+                <ScalarProperty Name="varis" ColumnName="varis" />
+                <ScalarProperty Name="firmaId" ColumnName="firmaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yonetici">
+            <EntityTypeMapping TypeName="TravelScannerModel.Yonetici">
+              <MappingFragment StoreEntitySet="Yonetici">
+                <ScalarProperty Name="yoneticiId" ColumnName="yoneticiId" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yorum">
+            <EntityTypeMapping TypeName="TravelScannerModel.Yorum">
+              <MappingFragment StoreEntitySet="Yorum">
+                <ScalarProperty Name="yorumId" ColumnName="yorumId" />
+                <ScalarProperty Name="yorum1" ColumnName="yorum" />
+                <ScalarProperty Name="firmaId" ColumnName="firmaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

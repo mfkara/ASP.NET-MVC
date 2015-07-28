@@ -1,0 +1,38 @@
+﻿@model MvcApplication5.Models.Yorum
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Yorum</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.yorum1)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.yorum1)
+            @Html.ValidationMessageFor(model => model.yorum1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Firmalar.firmaAdi)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("firmaId", String.Empty)
+            @Html.ValidationMessageFor(model => model.firmaId)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

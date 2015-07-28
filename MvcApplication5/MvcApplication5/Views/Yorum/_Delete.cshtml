@@ -1,0 +1,27 @@
+﻿@model MvcApplication5.Models.Yorum
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Yorum</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.yorum1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.yorum1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.firmaId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.firmaId)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

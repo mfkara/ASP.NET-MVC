@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TravelScannerModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Araba">
+    <Key>
+      <PropertyRef Name="arabaId" />
+    </Key>
+    <Property Name="arabaId" Type="int" Nullable="false" />
+    <Property Name="arabaTipi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="model" Type="nvarchar(max)" />
+    <Property Name="renk" Type="nvarchar(max)" />
+    <Property Name="fiyat" Type="int" Nullable="false" />
+    <Property Name="marka" Type="nvarchar(max)" />
+    <Property Name="firmaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Firmalar">
+    <Key>
+      <PropertyRef Name="firmaId" />
+    </Key>
+    <Property Name="firmaId" Type="int" Nullable="false" />
+    <Property Name="firmaAdi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="firmaTipi" Type="nvarchar(max)" />
+    <Property Name="firmaPuani" Type="int" />
+    <Property Name="firmaAciklamasi" Type="nvarchar(max)" />
+    <Property Name="firmaAdresi" Type="nvarchar(max)" />
+    <Property Name="sehirId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HavaDurumu">
+    <Key>
+      <PropertyRef Name="havaId" />
+    </Key>
+    <Property Name="havaId" Type="int" Nullable="false" />
+    <Property Name="gun" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="durum" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sicaklik" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sehirId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Otel">
+    <Key>
+      <PropertyRef Name="otelId" />
+    </Key>
+    <Property Name="otelId" Type="int" Nullable="false" />
+    <Property Name="odaTipi" Type="nvarchar(max)" />
+    <Property Name="fiyat" Type="int" Nullable="false" />
+    <Property Name="gun" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="firmaId" Type="int" />
+  </EntityType>
+  <EntityType Name="Resim">
+    <Key>
+      <PropertyRef Name="resimId" />
+    </Key>
+    <Property Name="resimId" Type="int" Nullable="false" />
+    <Property Name="resim" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sehir">
+    <Key>
+      <PropertyRef Name="sehirId" />
+    </Key>
+    <Property Name="sehirId" Type="int" Nullable="false" />
+    <Property Name="sehirAdi" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ucus">
+    <Key>
+      <PropertyRef Name="ucusId" />
+    </Key>
+    <Property Name="ucusId" Type="int" Nullable="false" />
+    <Property Name="saat" Type="time" Precision="7" Nullable="false" />
+    <Property Name="fiyat" Type="int" Nullable="false" />
+    <Property Name="ucusSuresi" Type="time" Precision="7" />
+    <Property Name="tarih" Type="date" Nullable="false" />
+    <Property Name="model" Type="nvarchar(max)" />
+    <Property Name="mesafe" Type="nvarchar(max)" />
+    <Property Name="kalkis" Type="int" Nullable="false" />
+    <Property Name="varis" Type="int" Nullable="false" />
+    <Property Name="firmaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Yonetici">
+    <Key>
+      <PropertyRef Name="yoneticiId" />
+    </Key>
+    <Property Name="yoneticiId" Type="int" Nullable="false" />
+    <Property Name="ad" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="soyad" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="kullaniciAdi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sifre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="mail" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Yorum">
+    <Key>
+      <PropertyRef Name="yorumId" />
+    </Key>
+    <Property Name="yorumId" Type="int" Nullable="false" />
+    <Property Name="yorum" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="firmaId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Araba_Firmalar">
+    <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="1" />
+    <End Role="Araba" Type="Self.Araba" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Firmalar">
+        <PropertyRef Name="firmaId" />
+      </Principal>
+      <Dependent Role="Araba">
+        <PropertyRef Name="firmaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Firmalar_Sehir">
+    <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+    <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sehir">
+        <PropertyRef Name="sehirId" />
+      </Principal>
+      <Dependent Role="Firmalar">
+        <PropertyRef Name="sehirId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HavaDurumu_Sehir">
+    <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+    <End Role="HavaDurumu" Type="Self.HavaDurumu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sehir">
+        <PropertyRef Name="sehirId" />
+      </Principal>
+      <Dependent Role="HavaDurumu">
+        <PropertyRef Name="sehirId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Otel_Firmalar">
+    <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="0..1" />
+    <End Role="Otel" Type="Self.Otel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Firmalar">
+        <PropertyRef Name="firmaId" />
+      </Principal>
+      <Dependent Role="Otel">
+        <PropertyRef Name="firmaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ucus_Firmalar">
+    <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="1" />
+    <End Role="Ucus" Type="Self.Ucus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Firmalar">
+        <PropertyRef Name="firmaId" />
+      </Principal>
+      <Dependent Role="Ucus">
+        <PropertyRef Name="firmaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ucus_Sehir_kalkis">
+    <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+    <End Role="Ucus" Type="Self.Ucus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sehir">
+        <PropertyRef Name="sehirId" />
+      </Principal>
+      <Dependent Role="Ucus">
+        <PropertyRef Name="kalkis" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ucus_Sehir_varis">
+    <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+    <End Role="Ucus" Type="Self.Ucus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sehir">
+        <PropertyRef Name="sehirId" />
+      </Principal>
+      <Dependent Role="Ucus">
+        <PropertyRef Name="varis" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yorum_Firmalar">
+    <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="1" />
+    <End Role="Yorum" Type="Self.Yorum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Firmalar">
+        <PropertyRef Name="firmaId" />
+      </Principal>
+      <Dependent Role="Yorum">
+        <PropertyRef Name="firmaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TravelScannerModel1StoreContainer">
+    <EntitySet Name="Araba" EntityType="Self.Araba" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Firmalar" EntityType="Self.Firmalar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HavaDurumu" EntityType="Self.HavaDurumu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Otel" EntityType="Self.Otel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resim" EntityType="Self.Resim" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sehir" EntityType="Self.Sehir" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ucus" EntityType="Self.Ucus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Yonetici" EntityType="Self.Yonetici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Yorum" EntityType="Self.Yorum" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Araba_Firmalar" Association="Self.FK_Araba_Firmalar">
+      <End Role="Firmalar" EntitySet="Firmalar" />
+      <End Role="Araba" EntitySet="Araba" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Firmalar_Sehir" Association="Self.FK_Firmalar_Sehir">
+      <End Role="Sehir" EntitySet="Sehir" />
+      <End Role="Firmalar" EntitySet="Firmalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HavaDurumu_Sehir" Association="Self.FK_HavaDurumu_Sehir">
+      <End Role="Sehir" EntitySet="Sehir" />
+      <End Role="HavaDurumu" EntitySet="HavaDurumu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Otel_Firmalar" Association="Self.FK_Otel_Firmalar">
+      <End Role="Firmalar" EntitySet="Firmalar" />
+      <End Role="Otel" EntitySet="Otel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ucus_Firmalar" Association="Self.FK_Ucus_Firmalar">
+      <End Role="Firmalar" EntitySet="Firmalar" />
+      <End Role="Ucus" EntitySet="Ucus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ucus_Sehir_kalkis" Association="Self.FK_Ucus_Sehir_kalkis">
+      <End Role="Sehir" EntitySet="Sehir" />
+      <End Role="Ucus" EntitySet="Ucus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ucus_Sehir_varis" Association="Self.FK_Ucus_Sehir_varis">
+      <End Role="Sehir" EntitySet="Sehir" />
+      <End Role="Ucus" EntitySet="Ucus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yorum_Firmalar" Association="Self.FK_Yorum_Firmalar">
+      <End Role="Firmalar" EntitySet="Firmalar" />
+      <End Role="Yorum" EntitySet="Yorum" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
